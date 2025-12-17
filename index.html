@@ -4,110 +4,370 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>极速计划 - STN工作室</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-* {margin:0;padding:0;box-sizing:border-box;}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;display:flex;flex-direction:column;line-height:1.6;color:#333;}
-.container{max-width:900px;margin:0 auto;padding:20px;flex:1;}
-.card{background:white;border-radius:20px;padding:60px 40px;margin-top:40px;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:fadeIn 0.8s ease-out;}
-h1{font-size:3rem;color:#2c3e50;margin-bottom:20px;text-align:center;font-weight:800;}
-.subtitle{font-size:1.2rem;color:#7f8c8d;text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:2px solid #ecf0f1;}
-.content{font-size:1.1rem;color:#34495e;margin-bottom:30px;white-space:pre-line;}
-.content p{margin-bottom:15px;}
-.button-group{display:flex;gap:20px;justify-content:center;margin-top:40px;flex-wrap:wrap;}
-.btn{padding:15px 30px;border:none;border-radius:12px;font-size:1.1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-block;box-shadow:0 4px 15px rgba(0,0,0,0.2);}
-.btn-primary{background:linear-gradient(135deg,#3498db 0%,#2980b9 100%);color:white;}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 7px 20px rgba(52,152,219,0.4);}
-.btn-secondary{background:linear-gradient(135deg,#e74c3c 0%,#c0392b 100%);color:white;}
-.btn-secondary:hover{transform:translateY(-3px);box-shadow:0 7px 20px rgba(231,76,60,0.4);}
-.page-section{display:none;}
-.page-section.active{display:block;}
-
-/* 应用卡片网格布局 */
-.app-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin: 25px 0;
+:root {
+    --primary-dark: #0f172a;
+    --secondary-dark: #1e293b;
+    --accent: #0ea5e9;
+    --accent-hover: #0284c7;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --border: #334155;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
 }
 
-/* 单个应用卡片 */
-.app-card {
-    background: #f8f9fa;
-    border-radius: 12px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, #020617 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+    color: var(--text-primary);
+    font-weight: 400;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
     padding: 20px;
+    flex: 1;
+}
+
+.card {
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 60px 40px;
+    margin-top: 40px;
+    animation: fadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 8px 32px rgba(2, 8, 20, 0.4);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    margin-bottom: 12px;
     text-align: center;
-    transition: all 0.3s ease;
-    border-left: 4px solid #e74c3c;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+}
+
+.content {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    white-space: pre-line;
+}
+
+.content p {
+    margin-bottom: 16px;
+}
+
+.button-group {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    background: rgba(14, 165, 233, 0.1);
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.15);
+}
+
+.btn-primary {
+    background: rgba(14, 165, 233, 0.15);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.page-section {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.page-section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.home-logo {
+    display: block;
+    margin: 0 auto 32px;
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 12px;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+
+.app-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.app-card {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.app-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.app-card:hover::before {
+    left: 100%;
 }
 
 .app-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 24px rgba(14, 165, 233, 0.2);
 }
 
-/* 应用图标 */
 .app-icon {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+    font-size: 2rem;
+    margin-bottom: 12px;
     display: block;
+    transition: transform 0.3s ease;
 }
 
-/* 应用名称 */
+.app-card:hover .app-icon {
+    transform: scale(1.1);
+}
+
 .app-name {
-    font-weight: 700;
-    color: #2c3e50;
-    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
 }
 
-/* 状态标签 */
 .app-status {
     display: inline-block;
     padding: 4px 12px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     border-radius: 20px;
-    font-weight: 600;
+    font-weight: 500;
     margin-top: 8px;
+    letter-spacing: 0.5px;
 }
 
 .status-slow {
-    background: #fff3cd;
-    color: #856404;
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--warning);
+    border: 1px solid var(--warning);
 }
 
 .status-fail {
-    background: #f8d7da;
-    color: #721c24;
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
+    border: 1px solid var(--danger);
 }
 
-.analysis-content{background:#f8f9fa;padding:25px;border-radius:15px;margin:20px 0;}
-.analysis-item{margin-bottom:25px;padding:20px;background:white;border-radius:10px;border-left:4px solid #3498db;}
-.analysis-item h3{color:#2c3e50;margin-bottom:15px;font-size:1.3rem;}
-.percentage{display:inline-block;padding:4px 12px;background:#e74c3c;color:white;border-radius:20px;font-weight:bold;margin:5px 10px 5px 0;}
-.edit-area{width:100%;min-height:300px;padding:15px;border:2px dashed #bdc3c7;border-radius:10px;font-size:1rem;font-family:inherit;resize:vertical;}
-footer{text-align:center;padding:20px;color:white;font-size:0.9rem;opacity:0.8;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-@media(max-width:768px){h1{font-size:2rem;}.card{padding:40px 20px;margin-top:20px;}.button-group{flex-direction:column;}.btn{width:100%;}.app-grid{grid-template-columns:1fr;}}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(2, 6, 23, 0.8);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: var(--secondary-dark);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: slideIn 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    box-shadow: 0 20px 50px rgba(2, 8, 20, 0.6);
+}
+
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close-btn:hover {
+    color: var(--text-primary);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.analysis-content {
+    background: rgba(15, 23, 42, 0.5);
+    padding: 24px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border: 1px solid var(--border);
+}
+
+.analysis-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: rgba(15, 23, 42, 0.7);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+    transition: transform 0.3s ease;
+}
+
+.analysis-item:hover {
+    transform: translateX(4px);
+}
+
+.analysis-item h3 {
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.percentage {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(14, 165, 233, 0.15);
+    color: var(--accent);
+    border-radius: 20px;
+    font-weight: 600;
+    margin: 4px 8px 4px 0;
+    font-size: 0.85rem;
+    border: 1px solid var(--accent);
+}
+
+footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    h1 { font-size: 2rem; }
+    .card { padding: 40px 20px; margin-top: 20px; }
+    .button-group { flex-direction: column; }
+    .btn { width: 100%; justify-content: center; }
+    .app-grid { grid-template-columns: 1fr; }
+    .home-logo { width: 80px; height: 80px; }
+}
 </style>
 </head>
 <body>
 <div class="container">
 <div id="main-page" class="page-section active">
 <div class="card">
+<img src="./logo.png" alt="STN工作室Logo" class="home-logo" onerror="this.style.display='none'">
+
 <h1>极速计划</h1>
 <div class="subtitle">STN工作室公示</div>
 <div class="content">关于管理办法的进一步优化——（上传/下载协议）
 时间管理：
-本协议规定所有协议人设备的使用时间区间“仅为参考”
+本协议规定所有协议人设备的使用时间区间"仅为参考"
 允许p2p类上下行高速时间
 A最高速下载9mb/s-12.5mb/s
-工作日7:00-11:30  14:40-15:40
+工作日7:00-11:30 14:40-15:40
 节假日7:00-13:00
 B高速下载8mb/s-10mb/s
 工作日不变
-节假日7:00-13:00   15:00-20:00  21:00-23:00</div>
+节假日7:00-13:00 15:00-20:00 21:00-23:00</div>
 <div class="button-group">
-<button class="btn btn-primary" onclick="showPage('wifi-page')"><i class="fas fa-wifi" style="margin-right:8px;"></i>WiFi卡顿快速定位</button>
-<button class="btn btn-secondary" onclick="showPage('custom-page')"><i class="fas fa-edit" style="margin-right:8px;"></i>使用卡顿重点软件/网页</button>
+<button class="btn btn-primary" onclick="showPage('wifi-page')"><i class="fas fa-wifi"></i>WiFi卡顿快速定位</button>
+<button class="btn btn-secondary" onclick="showPage('custom-page')"><i class="fas fa-edit"></i>使用卡顿重点软件/网页</button>
 </div>
 </div>
 </div>
@@ -118,26 +378,26 @@ B高速下载8mb/s-10mb/s
 <div class="subtitle">一键诊断卡顿原因分布</div>
 <div class="analysis-content">
 <div class="analysis-item">
-<h3>📱 浏览网页卡顿/打不开</h3>
+<h3>浏览网页卡顿/打不开</h3>
 <p><span class="percentage">95%</span>服务器问题（如DNS配置）</p>
 <p><span class="percentage">3%</span>设备类问题</p>
 <p><span class="percentage">2%</span>网速类问题</p>
 </div>
 <div class="analysis-item">
-<h3>🎮 玩游戏卡顿</h3>
+<h3>玩游戏卡顿</h3>
 <p><span class="percentage">40%</span>服务器问题</p>
 <p><span class="percentage">20%</span>设备类问题</p>
 <p><span class="percentage">40%</span>网速类问题</p>
 </div>
 <div class="analysis-item">
-<h3>⬇️ 下载速度慢</h3>
+<h3>下载速度慢</h3>
 <p><span class="percentage">70%</span>服务器问题</p>
 <p><span class="percentage">10%</span>设备类问题</p>
 <p><span class="percentage">20%</span>网速类问题</p>
 </div>
 </div>
 <div class="button-group">
-<button class="btn btn-primary" onclick="showPage('main-page')"><i class="fas fa-arrow-left" style="margin-right:8px;"></i>返回主页</button>
+<button class="btn" onclick="showPage('main-page')"><i class="fas fa-arrow-left"></i>返回主页</button>
 </div>
 </div>
 </div>
@@ -149,63 +409,194 @@ B高速下载8mb/s-10mb/s
 <div class="content">
 <p>经测试，以下应用或网站存在加载速度慢或加载失败的情况：</p>
 
-<!-- 高级应用卡片展示 -->
 <div class="app-grid">
     <div class="app-card">
-        <i class="fas fa-music app-icon" style="color: #1db954;"></i>
+        <i class="fas fa-music app-icon" style="color: #0ea5e9;"></i>
         <div class="app-name">酷狗APP</div>
         <div class="app-status status-slow">加载缓慢</div>
     </div>
     
     <div class="app-card">
-        <i class="fab fa-github app-icon" style="color: #24292e;"></i>
+        <i class="fab fa-github app-icon" style="color: #4b6cb7;"></i>
         <div class="app-name">github.com</div>
         <div class="app-status status-fail">访问失败</div>
     </div>
     
     <div class="app-card">
-        <i class="fab fa-tiktok app-icon" style="color: #ff0050;"></i>
+        <i class="fab fa-tiktok app-icon" style="color: #ec4899;"></i>
         <div class="app-name">抖音APP</div>
         <div class="app-status status-slow">加载缓慢</div>
     </div>
     
     <div class="app-card">
-        <i class="fas fa-cube app-icon" style="color: #6bc349;"></i>
+        <i class="fas fa-cube app-icon" style="color: #10b981;"></i>
         <div class="app-name">我的世界APP</div>
         <div class="app-status status-fail">有几率卡顿</div>
     </div>
     
     <div class="app-card">
-        <i class="fas fa-robot app-icon" style="color: #4a90e2;"></i>
+        <i class="fas fa-robot app-icon" style="color: #8b5cf6;"></i>
         <div class="app-name">豆包APP</div>
         <div class="app-status status-slow">加载缓慢</div>
     </div>
 </div>
 
-<p style="margin-top:25px; color:#7f8c8d; font-size:0.9rem;">
+<div id="appDetailModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<p style="margin-top:25px; color:var(--text-secondary); font-size:0.9rem;">
 </p>
 </div>
 <div class="button-group">
-<button class="btn btn-primary" onclick="showPage('main-page')"><i class="fas fa-arrow-left" style="margin-right:8px;"></i>返回主页</button>
+<button class="btn" onclick="showPage('main-page')"><i class="fas fa-arrow-left"></i>返回主页</button>
 </div>
 </div>
 </div>
 </div>
 
-<footer>2025-STN工作室</footer>
+<footer>©️ 2025 STN工作室</footer>
 
 <script>
+// 页面切换功能
 function showPage(pageId){
-document.querySelectorAll('.page-section').forEach(page=>{page.classList.remove('active');});
-document.getElementById(pageId).classList.add('active');
-window.scrollTo({top:0,behavior:'smooth'});}
-document.addEventListener('DOMContentLoaded',function(){
-const textarea=document.getElementById('customText');
-if(textarea){
-const savedText=localStorage.getItem('customPageText');
-if(savedText){textarea.value=savedText;}
-textarea.addEventListener('input',function(){localStorage.setItem('customPageText',this.value);});
-}});
+    document.querySelectorAll('.page-section').forEach(page=>{
+        page.classList.remove('active');
+    });
+    document.getElementById(pageId).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// 应用详情数据（集中在这里修改）
+const appDetails = {
+    "酷狗APP": {
+        title: "酷狗音乐 - 加载缓慢分析",
+        issues: [
+            "服务器加载过慢",
+            "首页推荐内容需要实时渲染",
+            "网络请求响应延迟较高"
+        ],
+        solutions: [
+            "清理缓存和离线数据",
+            "使用WiFi-5G网络",
+            "关闭后台其他占用带宽的应用"
+        ]
+    },
+    "github.com": {
+        title: "GitHub网站 - 访问失败分析",
+        issues: [
+            "DNS解析被污染或延迟",
+            "CDN节点主要在国外",
+            "GFW可能干扰访问"
+        ],
+        solutions: [
+            "使用国内镜像站点",
+            "修改hosts文件加速",
+            "配置VPN工具"
+        ]
+    },
+    "抖音APP": {
+        title: "抖音短视频 - 加载缓慢分析",
+        issues: [
+            "视频自动播放消耗大量带宽",
+            "初加载需要膨胀至1GB+",
+            "抖音占用运行内存严重"
+        ],
+        solutions: [
+            "设置仅在WiFi下自动播放",
+            "降低视频播放清晰度",
+            "定期清理缓存数据"
+        ]
+    },
+    "我的世界APP": {
+        title: "Minecraft - 卡顿分析",
+        issues: [
+            "服务器问题",
+            "资源包和模组加载慢",
+            "联机服务器连接不稳定"
+        ],
+        solutions: [
+            "重新启动启动",
+            "减少安装的模组数量",
+            "使用流量进行游戏"
+        ]
+    },
+    "豆包APP": {
+        title: "豆包AI - 加载缓慢分析",
+        issues: [
+            "AI模型推理需要服务器资源",
+            "服务器负载高",
+            "服务器加载慢"
+        ],
+        solutions: [
+            "错峰使用（避开晚高峰）",
+            "减少连续对话长度",
+            "检查网络连接稳定性"
+        ]
+    }
+};
+
+// 显示详情弹窗
+function showAppDetail(appName) {
+    const detail = appDetails[appName];
+    if (!detail) {
+        document.getElementById('modalBody').innerHTML = `
+            <h2 style="color:var(--text-primary);margin-bottom:20px;">暂无详情</h2>
+            <p style="color:var(--text-secondary);">该应用的详细信息尚未添加。</p>
+        `;
+        document.getElementById('appDetailModal').style.display = 'flex';
+        return;
+    }
+    
+    const modalBody = document.getElementById('modalBody');
+    modalBody.innerHTML = `
+        <h2 style="color:var(--text-primary);margin-bottom:24px;font-size:1.4rem;font-weight:600;">${detail.title}</h2>
+        
+        <h3 style="color:var(--danger);margin-bottom:12px;font-size:1rem;font-weight:600;letter-spacing:0.5px;">问题分析：</h3>
+        <ul style="margin-bottom:24px;color:var(--text-secondary);padding-left:20px;line-height:1.8;">
+            ${detail.issues.map(issue => `<li style="margin-bottom:8px;">${issue}</li>`).join('')}
+        </ul>
+        
+        <h3 style="color:var(--success);margin-bottom:12px;font-size:1rem;font-weight:600;letter-spacing:0.5px;">解决方案：</h3>
+        <ul style="color:var(--text-secondary);padding-left:20px;line-height:1.8;">
+            ${detail.solutions.map(solution => `<li style="margin-bottom:8px;">${solution}</li>`).join('')}
+        </ul>
+        
+        <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+            <p style="color:var(--text-secondary);font-size:0.8rem;">
+                <i class="fas fa-info-circle" style="margin-right:5px;"></i> 
+                点击卡片外部区域或右上角×可关闭此窗口
+            </p>
+        </div>
+    `;
+    
+    document.getElementById('appDetailModal').style.display = 'flex';
+}
+
+// 关闭弹窗
+function closeModal() {
+    document.getElementById('appDetailModal').style.display = 'none';
+}
+
+// 点击弹窗背景关闭
+document.getElementById('appDetailModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeModal();
+    }
+});
+
+// 为所有卡片添加点击事件
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.app-card').forEach(card => {
+        card.onclick = function() {
+            const appName = this.querySelector('.app-name').textContent;
+            showAppDetail(appName);
+        };
+    });
+});
 </script>
 </body>
 </html>
